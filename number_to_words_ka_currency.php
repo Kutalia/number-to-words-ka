@@ -123,10 +123,6 @@ function number_to_words_ka_currency ($number, $currency_eng, $use_suffix = true
             {
                 $string .= $space . number_to_words_ka_currency($remainder, $currency_eng, false, false);
             }
-            else
-            {
-                $string .= $currency;
-            }
             break;
     }
     // no suffix for 8 and 9
