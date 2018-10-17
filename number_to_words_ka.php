@@ -1,7 +1,6 @@
 <?php
 
-function number_to_words_ka ($number, $use_suffix = true, $use_spaces = true)
-{
+function number_to_words_ka ($number, $use_suffix = true, $use_spaces = true) {
   $conjunction    = 'და';
   $negative       = 'მინუს ';
   $decimal        = ' მთელი ';
@@ -44,13 +43,11 @@ function number_to_words_ka ($number, $use_suffix = true, $use_spaces = true)
 
   $space = $use_spaces ? ' ' : '';
 
-  if (!is_numeric($number))
-  {
+  if (!is_numeric($number)) {
     return false;
   }
 
-  if ($number > PHP_INT_MAX or $number < -PHP_INT_MAX)
-  {
+  if ($number > PHP_INT_MAX or $number < -PHP_INT_MAX) {
     // overflow
     trigger_error(
       'number_to_words_ka only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX,
@@ -59,20 +56,17 @@ function number_to_words_ka ($number, $use_suffix = true, $use_spaces = true)
     return false;
   }
 
-  if ($number < 0)
-  {
+  if ($number < 0) {
     return $negative . number_to_words_ka(abs($number));
   }
 
   $string = $fraction = null;
 
-  if (strpos($number, '.') !== false)
-  {
+  if (strpos($number, '.') !== false) {
     list($number, $fraction) = explode('.', $number);
   }
 
-  switch (true)
-  {
+  switch (true) {
     case $number == 0:
       $string = $dictionary[0];
       break;
@@ -119,13 +113,11 @@ function number_to_words_ka ($number, $use_suffix = true, $use_spaces = true)
   }
 
   // no suffix for 8 and 9
-  if ($use_suffix and !in_array($number % 20, array(8, 9)))
-  {
+  if ($use_suffix and !in_array($number % 20, array(8, 9))) {
     $string .= $suffix;
   }
 
-  if (null !== $fraction and is_numeric($fraction))
-  {
+  if (null !== $fraction and is_numeric($fraction)) {
     $string .= $decimal;
     $string .= number_to_words_ka($fraction);
     $string .= $fractionPrefix;
